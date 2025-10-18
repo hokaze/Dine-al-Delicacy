@@ -39,12 +39,12 @@ function addIngredient(name, qty)
   // sanity check
   if (ingredients_total + qty > ingredients_max)
   {
-      console.log("Could not add " . qty . " of ingredient " . name . ", would exceed max carry");
+      console.log("Could not add " + qty + " of ingredient " + name + ", would exceed max carry");
       return 1;
   }
   else if (ingredients[name] + qty < 0)
   {
-      console.log("Could not remove " . qty . " of ingredient " . name . ", would take below 0");
+      console.log("Could not remove " + qty + " of ingredient " + name + ", would take below 0");
       return -1;
   }
   
@@ -70,7 +70,7 @@ function addIngredient(qty)
     // only subtract from the "choice" ingredient if add was successful
     if (result == 0)
     {
-        console.log("Unable to pick 'your choice' ingredient to selected value: " . pick . " " . qty);
+        console.log("Unable to pick 'your choice' ingredient to selected value: " + pick + " " + qty);
     }
 }
 
