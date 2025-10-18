@@ -4,14 +4,14 @@
 function selectTab(tab_name)
 {
   var i, tab_low, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
+  tabcontent = document.getElementsByClassName("tab-content");
   // hide contents
   for (i = 0; i < tabcontent.length; i++)
   {
       tabcontent[i].style.display = "none";
   }
   // remove active from tabs besides selected
-  tablinks = document.getElementsByClassName("tablinks");
+  tablinks = document.getElementsByClassName("tab-links");
   tab_low = tab_name.toLowerCase();
   for (i = 0; i < tablinks.length; i++)
   {
@@ -56,7 +56,7 @@ function addIngredient(name, qty)
 }
 
 // handle "Your Choice" ingredient, convert into actual ingredient
-function addIngredient(qty)
+function pickIngredient(qty)
 {
     // sanity check: do we have any of the "choice" ingredient left?
     if (ingredients["choice"] < 1)
@@ -69,6 +69,10 @@ function addIngredient(qty)
     
     // only subtract from the "choice" ingredient if add was successful
     if (result == 0)
+    {
+        ingredients["choice"] -= qty;
+    }
+    else
     {
         console.log("Unable to pick 'your choice' ingredient to selected value: " + pick + " " + qty);
     }

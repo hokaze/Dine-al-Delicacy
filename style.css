@@ -107,7 +107,7 @@ button:hover::after, a:hover::after
     border-radius: 25px; /* rounded for highlights */
 }
 
-.tablinks
+.tab-links
 {
     font-weight: bold;
     color: #efefef;
@@ -131,7 +131,7 @@ button:hover::after, a:hover::after
 }
 
 /* Style the tab content */
-.tabcontent
+.tab-content
 {
     display: none;
     padding: 6px 12px;
@@ -140,25 +140,25 @@ button:hover::after, a:hover::after
 }
 
 /* Tables */
-.menuTable
+.menu-table
 {
     border-collapse: collapse;
     width: 100%;
     font-size: 18px;
 }
 
-.menuTable th, .menuTable td
+.menu-table th, .menu-table td
 {
     text-align: left;
     padding: 12px;
 }
 
-.menuTable tfoot tr
+.menu-table tfoot tr
 {
     border-top: 1px solid #ccc;
 }
 
-/*.menuTable button:hover
+/*.menu-table button:hover
 {
     background-color: #efefef55;
 }*/

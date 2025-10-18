@@ -14,20 +14,20 @@
     <br/>
 
     <div class="ff-menu tab">
-      <button id ="delicacies" class="tablinks" onclick="selectTab('Delicacies')">Delicacies</button>
-      <button id ="ingredients" class="tablinks" onclick="selectTab('Ingredients')">Ingredients</button>
-      <button id ="load-save" class="tablinks" onclick="selectTab('Load-Save')">Load/Save</button>
+      <button id ="delicacies" class="tab-links" onclick="selectTab('Delicacies')">Delicacies</button>
+      <button id ="ingredients" class="tab-links" onclick="selectTab('Ingredients')">Ingredients</button>
+      <button id ="load-save" class="tab-links" onclick="selectTab('Load-Save')">Load/Save</button>
     </div>
 
     <!-- Class table search -->
-    <div id="Delicacies" class="ff-menu tabcontent">
+    <div id="Delicacies" class="ff-menu tab-content">
       <p>
         Just some placeholder text for now...
         
         This does NOT automatically calculate the qty of each ingredient or number of times the recipe can be used, nor does the Use/Rename button work yet
       </p>
     
-      <table id="classTable" class="menuTable">
+      <table id="classTable" class="menu-table">
         <tr class="header">
           <th>Name</th>
           <th>Combination</th>
@@ -62,13 +62,13 @@
       </table>
     </div>
     
-    <!-- Powers -->
-    <div id="Ingredients" class="ff-menu tabcontent">
+    <!-- Ingredients -->
+    <div id="Ingredients" class="ff-menu tab-content">
       <p>
         Placeholders... (the "Your choice" option should be conditional on if it's been rolled and give the option to convert it into an actual ingredient)
       </p>
       
-      <table id="ingredientsTable" class="menuTable">
+      <table id="ingredientsTable" class="menu-table">
         <tr class="header">
           <th>Ingredient</th>
           <th>Qty</th>
@@ -115,13 +115,13 @@
           <td id="choice_qty">1</td>
           <td>N/A</td>
           <td colspan="2">
-            <select name="choice_select" id="choice_select">
-              <option value="bitter">Bitter</option>
-              <option value="salty">Salty</option>
-              <option value="sour">Sour</option>
-              <option value="sweet">Sweet</option>
-              <option value="umami">Umami</option>
-            </select>
+              <select name="choice_select" id="choice_select">
+                <option value="bitter">Bitter</option>
+                <option value="salty">Salty</option>
+                <option value="sour">Sour</option>
+                <option value="sweet">Sweet</option>
+                <option value="umami">Umami</option>
+              </select>
             <button onclick="pickIngredient(1)">[Pick 1]</button>
           </td>
         </tr>
@@ -136,8 +136,8 @@
       </table>
     </div>
 
-    <!-- Feats -->
-    <div id="Load-Save" class="ff-menu tabcontent">
+    <!-- Load/Save -->
+    <div id="Load-Save" class="ff-menu tab-content">
       TODO: some Save/Load mechanism here to support multiple different Gourmet class characters with option to use browser cached storage but also save/load to json
       <br/><br/>
       Need to be able to set name of save file and Gourmet Cooking skill level (as max ingredients scales with Cooking skill)
