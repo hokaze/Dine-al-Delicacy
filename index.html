@@ -29,21 +29,11 @@
     
       <table id="classTable" class="menuTable">
         <tr class="header">
-          <th>
-            Name
-          </th>
-          <th>
-            Combination
-          </th>
-          <th>
-            Qty
-          </th>
-          <th>
-            Effect
-          </th>
-          <th>
-            Action
-          </th>
+          <th>Name</th>
+          <th>Combination</th>
+          <th>Qty</th>
+          <th>Effect</th>
+          <th colspan="2">Actions</th>
         </tr>
         <tr>
           <td class="name">Sou-Swee Treat</td>
@@ -83,48 +73,57 @@
           <th>Ingredient</th>
           <th>Qty</th>
           <th>Combine?</th>
-          <th>Actions</th>
+          <th colspan="2">Actions</th>
         </tr>
         <tr>
           <td class="name">Bitter</td>
           <td id="bitter_qty">2</td>
           <td><a><input id="bitter_check" type="checkbox"/></a></td>
-          <td><button onclick="addIngredient('bitter', 1)">[Buy for 20z]</button></td>
-          <td><button onclick="addIngredient('bitter', -1)">[Remove]</button></td>
+          <td><button onclick="addIngredient('bitter', 1)">[Buy 1 for 20z]</button></td>
+          <td><button onclick="addIngredient('bitter', -1)">[Remove 1]</button></td>
         </tr>
         <tr>
           <td class="name">Salty</td>
           <td id="salty_qty">0</td>
           <td><a><input id="salty_check" type="checkbox"/></a></td>
-          <td><button onclick="addIngredient('salty', 1)">[Buy for 20z]</button></td>
-          <td><button onclick="addIngredient('salty', -1)">[Remove]</button></td>
+          <td><button onclick="addIngredient('salty', 1)">[Buy 1 for 20z]</button></td>
+          <td><button onclick="addIngredient('salty', -1)">[Remove 1]</button></td>
         </tr>
         <tr>
           <td class="name">Sour</td>
           <td id="sour_qty">1</td>
           <td><a><input id="sour_check" type="checkbox"/></a></td>
-          <td><button onclick="addIngredient('sour', 1)">[Buy for 20z]</button></td>
-          <td><button onclick="addIngredient('sour', -1)">[Remove]</button></td>
+          <td><button onclick="addIngredient('sour', 1)">[Buy 1 for 20z]</button></td>
+          <td><button onclick="addIngredient('sour', -1)">[Remove 1]</button></td>
         </tr>
         <tr>
           <td class="name">Sweet</td>
           <td id="sweet_qty">3</td>
           <td><a><input id="sweet_check" type="checkbox"/></a></td>
-          <td><button onclick="addIngredient('sweet', 1)">[Buy for 20z]</button></td>
-          <td><button onclick="addIngredient('sweet', -1)">[Remove]</button></td>
+          <td><button onclick="addIngredient('sweet', 1)">[Buy 1 for 20z]</button></td>
+          <td><button onclick="addIngredient('sweet', -1)">[Remove 1]</button></td>
         </tr>
         <tr>
           <td class="name">Umami</td>
           <td id="umami_qty">0</td>
           <td><a><input id="umami_check" type="checkbox"/></a></td>
-          <td><button onclick="addIngredient('umami', 1)">[Buy for 20z]</button></td>
-          <td><button onclick="addIngredient('umami', -1)">[Remove]</button></td>
+          <td><button onclick="addIngredient('umami', 1)">[Buy 1 for 20z]</button></td>
+          <td><button onclick="addIngredient('umami', -1)">[Remove 1]</button></td>
         </tr>
         <tr>
           <td class="name">Your Choice</td>
           <td id="choice_qty">1</td>
           <td>N/A</td>
-          <td><button>[Pick an Ingredient]</button></td>
+          <td colspan="2">
+            <select name="choice_select" id="choice_select">
+              <option value="bitter">Bitter</option>
+              <option value="salty">Salty</option>
+              <option value="sour">Sour</option>
+              <option value="sweet">Sweet</option>
+              <option value="umami">Umami</option>
+            </select>
+            <button onclick="pickIngredient(1)">[Pick 1]</button>
+          </td>
         </tr>
         <tfoot>
           <tr>
@@ -147,74 +146,8 @@
       <br/><br/><br/>
     </div>
     
-    <!-- TODO: will split this into a .js file and tidy up later -->
-    <script>
-      function selectTab(tab_name)
-      {
-          var i, tab_low, tabcontent, tablinks;
-          tabcontent = document.getElementsByClassName("tabcontent");
-          // hide contents
-          for (i = 0; i < tabcontent.length; i++)
-          {
-              tabcontent[i].style.display = "none";
-          }
-          // remove active from tabs besides selected
-          tablinks = document.getElementsByClassName("tablinks");
-          tab_low = tab_name.toLowerCase();
-          for (i = 0; i < tablinks.length; i++)
-          {
-              tablinks[i].className = tablinks[i].className.replace(" active", "");
-              if (tablinks[i].id == tab_low)
-              {
-                tablinks[i].className += " active";
-              }
-          }
-          // make selected content visible
-          document.getElementById(tab_name).style.display = "block";
-      }
-      selectTab("Delicacies");
-      
-      // load initial example vars for ingredients
-      var ingredients =
-      {
-          bitter: 2,
-          salty: 0,
-          sour: 1,
-          sweet: 3,
-          umami: 0,
-          choice: 1,
-      };
-      var ingredients_total = 8;
-      var ingredients_max = 15;
-      
-      function addIngredient(name, qty)
-      {
-          if (name == "random")
-          {
-              var keys = Object.keys(ingredients);
-              var key = keys[Math.floor(Math.random() * keys.length)];
-              name = key;
-              //console.log("Added random item " + name);
-          }
-          
-          // sanity check
-          if (ingredients_total + qty > ingredients_max)
-          {
-              console.log("Could not add ingredient, would exceed max carry");
-              return;
-          }
-          else if (ingredients[name] + qty < 0)
-          {
-              console.log("Could not remove ingredient, would take qty below 0");
-              return;
-          }
-          
-          ingredients[name] += qty;
-          ingredients_total += qty;
-          document.getElementById(name + "_qty").textContent = ingredients[name];
-          document.getElementById("ingredient_qty").textContent = ingredients_total + "/" + ingredients_max + " carried";
-      }
-    </script>
+    <!-- load helper functions and setup misc js vars -->
+    <script src="cookbook.js"></script>
     
     <br/><br/>
     <footer>
