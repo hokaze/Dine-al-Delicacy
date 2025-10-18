@@ -16,10 +16,11 @@
     <div class="ff-menu tab">
       <button id ="delicacies" class="tab-links" onclick="selectTab('Delicacies')">Delicacies</button>
       <button id ="ingredients" class="tab-links" onclick="selectTab('Ingredients')">Ingredients</button>
+      <button id ="effects" class="tab-links" onclick="selectTab('Effects')">Effects</button>
       <button id ="load-save" class="tab-links" onclick="selectTab('Load-Save')">Load/Save</button>
     </div>
 
-    <!-- Class table search -->
+    <!-- DELICACIES -->
     <div id="Delicacies" class="ff-menu tab-content">
       <p>
         Just some placeholder text for now...
@@ -31,7 +32,7 @@
         <tr class="header">
           <th>Name</th>
           <th>Combination</th>
-          <th>Qty</th>
+          <th>Can Make?</th>
           <th>Effect</th>
           <th colspan="2">Actions</th>
         </tr>
@@ -39,7 +40,7 @@
           <td class="name">Sou-Swee Treat</td>
           <td>Sour (1) + Sweet (3)</td>
           <td>1</td>
-          <td>Each of this <b>delicacy</b>’s targets recovers 40 Hit Points. This amount increases to 50 if you are <b>level 30 or higher</b>.</td>
+          <td>Each of this <b>delicacy</b>'s targets recovers 40 Hit Points. This amount increases to 50 if you are <b>level 30 or higher</b>.</td>
           <td><button>[Use]</button></td>
           <td><button>[Rename]</button></td>
         </tr>
@@ -47,7 +48,7 @@
           <td class="name">Mage's Regret</td>
           <td>Bitter (2) + Salty (0) + Sour (1)</td>
           <td>0</td>
-          <td>Each of this <b>delicacy</b>’s targets cannot perform the <b>Spell</b> action during their next turn.</td>
+          <td>Each of this <b>delicacy</b>'s targets cannot perform the <b>Spell</b> action during their next turn.</td>
           <td><button>[Use]</button></td>
           <td><button>[Rename]</button></td>
         </tr>
@@ -55,14 +56,14 @@
           <td class="name">Dubious Food</td>
           <td>Sweet (3) + Umami (0)</td>
           <td>0</td>
-          <td>Each of this <b>delicacy</b>’s targets suffer from the <b>poisoned status</b> effect</td>
+          <td>Each of this <b>delicacy</b>'s targets suffer from the <b>weak</b> status effect.</td>
           <td><button>[Use]</button></td>
           <td><button>[Rename]</button></td>
         </tr>
       </table>
     </div>
     
-    <!-- Ingredients -->
+    <!-- INGREDIENTS -->
     <div id="Ingredients" class="ff-menu tab-content">
       <p>
         Placeholders... (the "Your choice" option should be conditional on if it's been rolled and give the option to convert it into an actual ingredient)
@@ -135,8 +136,107 @@
         </tfoot>
       </table>
     </div>
-
-    <!-- Load/Save -->
+    
+    <!-- EFFECTS -->
+    <div id="Effects" class="ff-menu tab-content">
+      <table if="effectTable" class="menu-table">
+        <th>
+          <tr>
+            <th>d12</th>
+            <th>Known?</th>
+            <th>Combination Effect</th>
+          </tr>
+        </th>
+        <tr>
+          <td class="name">1</td>
+          <td id="effectKnown1">0/6</td>
+          <td>
+            Each of this <b>delicacy</b>'s targets recovers from the <b>(choose one: dazed; enraged; poisoned; shaken; slow; weak)</b> status effect.
+          </td>
+        </tr>
+        <tr>
+          <td class="name">2</td>
+          <td id="effectKnown2">0/4</td>
+          <td>
+            Each of this <b>delicacy</b>'s targets suffers the (choose one: <b>dazed; shaken; slow; weak</b>) status effect.
+          </td>
+        </tr>
+        <tr>
+          <td class="name">3</td>
+          <td id="effectKnown3">1/1</td>
+          <td>
+            Each of this <b>delicacy</b>'s targets recovers 40 Hit Points. This amount increases to 50 if you are <b>level 30 or higher</b>.
+          </td>
+        </tr>
+        <tr>
+          <td class="name">4</td>
+          <td id="effectKnown4">0/1</td>
+          <td>
+            Each of this <b>delicacy</b>'s targets recovers 40
+            Mind Points. This amount increases to 50 if you are <b>level 30 or higher</b>.
+          </td>
+        </tr>
+        <tr>
+          <td class="name">5</td>
+          <td id="effectKnown5">0/6</td>
+          <td>
+            Each of this <b>delicacy</b>'s targets suffers 20 <b>(choose one: air; bolt; earth; fire; ice; poison)</b> damage. This amount increases to 30 untyped damage if you are <b>level 30 or higher</b>.
+          </td>
+        </tr>
+        <tr>
+          <td class="name">6</td>
+          <td id="effectKnown6">0/6</td>
+          <td>
+            Until the end of your next turn, every source that deals <b>(choose one: air; bolt; earth; fire; ice; poison)</b> damage deals 5 extra damage to each of this <b>delicacy</b>'s targets.
+          </td>
+        </tr>
+        <tr>
+          <td class="name">7</td>
+          <td id="effectKnown7">0/1</td>
+          <td>
+            Each of this <b>delicacy</b>'s targets cannot perform the <b>Guard</b> action during their next turn.
+          </td>
+        </tr>
+        <tr>
+          <td class="name">8</td>
+          <td id="effectKnown8">1/1</td>
+          <td>
+            Each of this <b>delicacy</b>'s targets cannot perform the <b>Spell</b> action during their next turn.
+          </td>
+        </tr>
+        <tr>
+          <td class="name">9</td>
+          <td id="effectKnown9">0/1</td>
+          <td>
+            Each of this <b>delicacy</b>'s targets cannot perform the <b>Skill</b> action during their next turn.
+          </td>
+        </tr>
+        <tr>
+          <td class="name">10</td>
+          <td id="effectKnown10">0/6</td>
+          <td>
+            Each of this <b>delicacy</b>'s targets gains
+            Resistance to <b>(choose one: air; bolt; earth; fire; ice; poison)</b> damage until the end of your next turn.
+          </td>
+        </tr>
+        <tr>
+          <td class="name">11</td>
+          <td id="effectKnown11">0/4</td>
+          <td>
+            Each of this <b>delicacy</b>'s targets treats their <b>(choose one: Dexterity; Insight; Might; Willpower)</b> as if it were one die size higher (up to a maximum of <b>d12</b>) until the end of your next turn.
+          </td>
+        </tr>
+        <tr>
+          <td class="name">12</td>
+          <td id="effectKnown12">0/6</td>
+          <td>
+            During the next turn of each of this <b>delicacy</b>'s targets, all damage they deal becomes <b>(choose one: air; bolt; earth; fire; ice; poison)</b> and its type cannot change.
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+    <!-- LOAD/SAVE -->
     <div id="Load-Save" class="ff-menu tab-content">
       TODO: some Save/Load mechanism here to support multiple different Gourmet class characters with option to use browser cached storage but also save/load to json
       <br/><br/>
