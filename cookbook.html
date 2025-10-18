@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dine-al Delicacy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+  </head>
+  
+  <body>
+    <h2>Dine-al Delicacy</h2>
+    <p>Proof of Concept - tool to aid Fabula Ultima Gourmets</p>
+    <br/>
+
+    <div class="ff-menu tab">
+      <button id ="delicacies" class="tablinks" onclick="selectTab('Delicacies')">Delicacies</button>
+      <button id ="ingredients" class="tablinks" onclick="selectTab('Ingredients')">Ingredients</button>
+      <button id ="load-save" class="tablinks" onclick="selectTab('Load-Save')">Load/Save</button>
+    </div>
+
+    <!-- Class table search -->
+    <div id="Delicacies" class="ff-menu tabcontent">
+      <p>
+        Just some placeholder text for now...
+        
+        This does NOT automatically calculate the qty of each ingredient or number of times the recipe can be used, nor does the Use/Rename button work yet
+      </p>
+    
+      <table id="classTable" class="menuTable">
+        <tr class="header">
+          <th>
+            Name
+          </th>
+          <th>
+            Combination
+          </th>
+          <th>
+            Qty
+          </th>
+          <th>
+            Effect
+          </th>
+          <th>
+            Action
+          </th>
+        </tr>
+        <tr>
+          <td class="name">Sou-Swee Treat</td>
+          <td>Sour (1) + Sweet (3)</td>
+          <td>1</td>
+          <td>Each of this <b>delicacy</b>’s targets recovers 40 Hit Points. This amount increases to 50 if you are <b>level 30 or higher</b>.</td>
+          <td><button>[Use]</button></td>
+          <td><button>[Rename]</button></td>
+        </tr>
+        <tr>
+          <td class="name">Mage's Regret</td>
+          <td>Bitter (2) + Salty (0) + Sour (1)</td>
+          <td>0</td>
+          <td>Each of this <b>delicacy</b>’s targets cannot perform the <b>Spell</b> action during their next turn.</td>
+          <td><button>[Use]</button></td>
+          <td><button>[Rename]</button></td>
+        </tr>
+        <tr>
+          <td class="name">Dubious Food</td>
+          <td>Sweet (3) + Umami (0)</td>
+          <td>0</td>
+          <td>Each of this <b>delicacy</b>’s targets suffer from the <b>poisoned status</b> effect</td>
+          <td><button>[Use]</button></td>
+          <td><button>[Rename]</button></td>
+        </tr>
+      </table>
+    </div>
+    
+    <!-- Powers -->
+    <div id="Ingredients" class="ff-menu tabcontent">
+      <p>
+        Placeholders... (the "Your choice" option should be conditional on if it's been rolled and give the option to convert it into an actual ingredient)
+      </p>
+      
+      <table id="ingredientsTable" class="menuTable">
+        <tr class="header">
+          <th>Ingredient</th>
+          <th>Qty</th>
+          <th>Combine?</th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          <td class="name">Bitter</td>
+          <td id="bitter_qty">2</td>
+          <td><a><input id="bitter_check" type="checkbox"/></a></td>
+          <td><button onclick="addIngredient('bitter', 1)">[Buy for 20z]</button></td>
+          <td><button onclick="addIngredient('bitter', -1)">[Remove]</button></td>
+        </tr>
+        <tr>
+          <td class="name">Salty</td>
+          <td id="salty_qty">0</td>
+          <td><a><input id="salty_check" type="checkbox"/></a></td>
+          <td><button onclick="addIngredient('salty', 1)">[Buy for 20z]</button></td>
+          <td><button onclick="addIngredient('salty', -1)">[Remove]</button></td>
+        </tr>
+        <tr>
+          <td class="name">Sour</td>
+          <td id="sour_qty">1</td>
+          <td><a><input id="sour_check" type="checkbox"/></a></td>
+          <td><button onclick="addIngredient('sour', 1)">[Buy for 20z]</button></td>
+          <td><button onclick="addIngredient('sour', -1)">[Remove]</button></td>
+        </tr>
+        <tr>
+          <td class="name">Sweet</td>
+          <td id="sweet_qty">3</td>
+          <td><a><input id="sweet_check" type="checkbox"/></a></td>
+          <td><button onclick="addIngredient('sweet', 1)">[Buy for 20z]</button></td>
+          <td><button onclick="addIngredient('sweet', -1)">[Remove]</button></td>
+        </tr>
+        <tr>
+          <td class="name">Umami</td>
+          <td id="umami_qty">0</td>
+          <td><a><input id="umami_check" type="checkbox"/></a></td>
+          <td><button onclick="addIngredient('umami', 1)">[Buy for 20z]</button></td>
+          <td><button onclick="addIngredient('umami', -1)">[Remove]</button></td>
+        </tr>
+        <tr>
+          <td class="name">Your Choice</td>
+          <td id="choice_qty">1</td>
+          <td>N/A</td>
+          <td><button>[Pick an Ingredient]</button></td>
+        </tr>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td id="ingredient_qty">8/15 carried</td>
+            <td><button>[Cook Combined Ingredients]</button></td>
+            <td><button onclick="addIngredient('random', 1)">[Buy Random for 20z]</button></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Feats -->
+    <div id="Load-Save" class="ff-menu tabcontent">
+      TODO: some Save/Load mechanism here to support multiple different Gourmet class characters with option to use browser cached storage but also save/load to json
+      <br/><br/>
+      Need to be able to set name of save file and Gourmet Cooking skill level (as max ingredients scales with Cooking skill)
+      <br/><br/>
+      Some mechanism for initial starting character setup, as starting characters start with 10 ingredients
+      <br/><br/><br/>
+    </div>
+    
+    <!-- TODO: will split this into a .js file and tidy up later -->
+    <script>
+      function selectTab(tab_name)
+      {
+          var i, tab_low, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          // hide contents
+          for (i = 0; i < tabcontent.length; i++)
+          {
+              tabcontent[i].style.display = "none";
+          }
+          // remove active from tabs besides selected
+          tablinks = document.getElementsByClassName("tablinks");
+          tab_low = tab_name.toLowerCase();
+          for (i = 0; i < tablinks.length; i++)
+          {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+              if (tablinks[i].id == tab_low)
+              {
+                tablinks[i].className += " active";
+              }
+          }
+          // make selected content visible
+          document.getElementById(tab_name).style.display = "block";
+      }
+      selectTab("Delicacies");
+      
+      // load initial example vars for ingredients
+      var ingredients =
+      {
+          bitter: 2,
+          salty: 0,
+          sour: 1,
+          sweet: 3,
+          umami: 0,
+          choice: 1,
+      };
+      var ingredients_total = 8;
+      var ingredients_max = 15;
+      
+      function addIngredient(name, qty)
+      {
+          if (name == "random")
+          {
+              var keys = Object.keys(ingredients);
+              var key = keys[Math.floor(Math.random() * keys.length)];
+              name = key;
+              //console.log("Added random item " + name);
+          }
+          
+          // sanity check
+          if (ingredients_total + qty > ingredients_max)
+          {
+              console.log("Could not add ingredient, would exceed max carry");
+              return;
+          }
+          else if (ingredients[name] + qty < 0)
+          {
+              console.log("Could not remove ingredient, would take qty below 0");
+              return;
+          }
+          
+          ingredients[name] += qty;
+          ingredients_total += qty;
+          document.getElementById(name + "_qty").textContent = ingredients[name];
+          document.getElementById("ingredient_qty").textContent = ingredients_total + "/" + ingredients_max + " carried";
+      }
+    </script>
+    
+    <br/><br/>
+    <footer>
+      <p><i>Version 0.01 (2025-10-18)</i></p>
+      <br/>
+      <p>
+        <strong>Notice</strong>
+        Dine-al Delicacy is an independent production by hokaze and is not affiliated with Need Games or Rooster Games. It is published under the <a href="https://need.games/wp-content/uploads/2024/06/Fabula-Ultima-Third-Party-Tabletop-License-1.0.pdf">Fabula Ultima Third-Party Tabletop License 1.0</a>. Fabula Ultima is a roleplaying game created by Emanuele Galletto and published by Need Games. Fabula Ultima is © Need Games and Rooster Games.
+        <br/>
+        This tool is intended to be used alongside the <i>Fabula Ultima Core Rulebook</i> and the <i>Fabula Ultima Natural Fantasy Atlas</i> for the game rules and the Gourmet class respectively.
+      </p>
+      <br/>
+      <hr/>
+      <br/>
+      <p>
+        <strong>Recent Changes</strong>
+        <br/>
+        <u>v0.01 - Initial version, early PoC</u>
+        <br/>
+        - very rough mockup, nonfunctional, more of a preview of what some things would look like (and setting up an FF-style menu aesthetic)
+        <br/>
+      </p>
+      <br/>
+      <hr/>
+      <br/>
+      <p>
+        <strong>TODO</strong>
+        <br/>
+        - ...uh, drawing the rest of the owl, barely started, more of a mockup than anything
+        <br/>
+        - need way to set Gourmet Cooking skill level
+        <br/>
+        - need the main functionality of randomly rolling combined ingredients
+        <br/>
+        - some sort of message box for selecting options for rolls that result in multiple effects (or picking the "Your choice" ingredient)
+        <br/>
+        - needs some way of manually adding delicacies you've already rolled outside the app, etc
+      </p>
+    <br/>
+    </footer>
+  </body>
+</html>

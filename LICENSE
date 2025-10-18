@@ -1,0 +1,88 @@
+== 1. Dine-al Delicacy ==
+
+Dine-al Delicacy is licensed under the MIT License.
+
+This applies to all code contents of this repo, but not any references to the Fabula Ultima gameplay mechanics used by the Gourmet class.
+
+
+= MIT License =
+
+Copyright (c) 2025 Claire Wright, aka hokaze
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+--------------------------------
+
+== 2. Fabula Ultima content ==
+
+Dine-al Delicacy is an independent production by hokaze and is not affiliated with Need Games or Rooster Games. It is published under the Fabula Ultima Third-Party Tabletop License 1.0. Fabula Ultima is a roleplaying game created by Emanuele Galletto and published by Need Games. Fabula Ultima is © Need Games and Rooster Games.
+
+This tool is intended to be used alongside the Fabula Ultima Core Rulebook and the Fabula Ultima Natural Fantasy Atlas for the game rules and the Gourmet class respectively.
+
+
+= Fabula Ultima Third-Party Tabletop License 1.0 =
+Need Games S.r.l. (“NDG”) and Rooster Games – Emanuele Galletto (“EG”) have created the Fabula Ultima tabletop roleplaying game published by NDG in 2021.
+This license agreement (“Third-Party Tabletop License agreement”, “license” or “agreement”) grants an author or publisher (“You”) a worldwide, perpetual, non-exclusive, royalty-free, non-sublicensable right to create, publish, sell and distribute in printed or digital form (e.g. PDF, character generators, etc.), as well as virtual tabletop modules (“VTT”), their own tabletop roleplaying game content based on or compatible with Fabula Ultima (“Work”). This license agreement does not grant any translation or adaptation rights (e.g. derivative works like comic books or graphic novels). The Work is a publication that includes rules additions, adventures, equipment, creatures, enemy profiles or setting material. By creating such a Work, You indicate your acceptance of the terms of this agreement:
+
+1. RESERVED MATERIAL, LICENSE IRREVOCABILITY AND TERMINATION. Fabula
+Ultima trademarks, including its name, artwork, text, materials and trade dress, are NDG and EG reserved material. You cannot reproduce or include such elements in your Work – except as set forth in section 3, below – although making reference to Fabula Ultima in the Work cover or text is allowed (e.g. “Compatible with Fabula Ultima”, “Powered by Fabula Ultima”). As long as You comply with all the terms of this agreement the license is to be considered as irrevocable. However, it terminates automatically should You breach any term of this agreement.
+
+2. PURPOSE OF THIS LICENSE AND TYPES OF WORK. NDG and EG encourage third-party publications compatible with or powered by the Fabula Ultima game system. Your Work must fall into one of two categories: “Compatible with” Fabula Ultima means that your Work is an unofficial Fabula Ultima compatible game content, fully adherent to this license, and relies on the official rules (i.e. it is not a stand-alone content) to be used or played. Conversely, “Powered by” Fabula Ultima means that your Work is a stand-alone product based on the Fabula Ultima game system and mechanics.
+
+3. RULES AND SYSTEM REFERENCES. Your Work may include additions/
+modifications to the Fabula Ultima rules (e.g. new Classes, Heroic Skills, NPCs, etc.) as well as rules for anything not expressly covered by the official rules. You may reference the Fabula Ultima rules, text, and mechanics (from the Core Rulebook or any official publication by NDG and EG) in your Work, including using the exact same terminology and full extended entries and descriptions for what concerns: (i) Basic Weapons, (ii) Basic Armor and Shields, (iii) default Inventory items, (iv) the rules and mechanics (e.g. Class Skills) of each Class, (v) Heroic Skills, (vi) Rare Item Qualities, (vii) NPC Spells, as long as You do not use them in the Work title. Your Work may also include, although this is not recommended, page references to official Fabula Ultima rules and other Fabula Ultima official publications.
+
+4. LOGOS. If your Work is compatible with Fabula Ultima, You are allowed to
+use the attached “Fabula Ultima Mod” Logo on your Work. It’s permitted, but
+nowhere is it required, to use the attached “Powered by Fabula Ultima” Logo on
+your Work, if it is a stand-alone product.
+
+5. STYLE GUIDE. Although Fabula Ultima’s trade dress is expressly reserved
+material, You may wish to refer to the attached Style Guide in your Work, to
+harmonize your Work’s layout and wording with Fabula Ultima’s trade dress and
+writing conventions, especially if your Work is compatible with Fabula Ultima.
+
+6. NOTICE. You must include a notice on your Work, on your website or
+advertising material associated therewith, stating that your Work is not
+endorsed or sponsored in any way by NDG or EG (e.g. “[Your Work] is an
+independent production by [Author or Publisher] and is not affiliated with Need Games or Rooster Games. It is published under the Fabula Ultima Third-Party Tabletop License 1.0. Fabula Ultima is a roleplaying game created by Emanuele Galletto and published by Need Games. Fabula Ultima is © Need Games and Rooster Games.” If your Work is compatible with Fabula Ultima, You must state that your Work requires the Fabula Ultima official rules (e.g. “[Your Work] requires the Fabula Ultima Core Rulebook”. You must also include a notice on your Work if it contains any kind of AI-generated content (e.g. text, art, videos, etc.). You must also include a copy or a working link of this Fabula Ultima Third-Party License with each Work you create under this license.
+
+7. RESTRICTIONS. You cannot use this license to create, produce, or distribute
+a Work that includes, is associated with, referred to or expressly endorsed/
+sponsored by other preexisting trademarks or companies – whether or not
+they're part of the game industry. You remain free to trademark your Work, once You've created it (e.g. a Campaign Sourcebook logo), provided that this does not harm or hinder NDG or EG in any way.
+
+8. LIMITATIONS & EXCLUSIONS. The title of your Work may not include the words:
+“Fabula”, “Fabula Ultima”. For the purposes of this agreement, VTTs do not include non-fungible tokens games (NFT) or video games, only virtual tabletop modules.
+
+9. OWNERSHIP OF FABULA ULTIMA. You agree that NDG and EG own all rights in Fabula Ultima and that you will not contest those rights. NDG and EG expressly reserve all rights not expressly granted in this agreement.
+
+10. OWNERSHIP OF YOUR WORK. You own all rights in any Work You make under this license. NDG and EG may not use or copy your Work without your permission, but you acknowledge that NDG and EG may autonomously create something similar to your Work, and that they are not prohibited from doing so unless they knowingly and intentionally copied your original Work.
+
+11. REPRESENTATIONS AND WARRANTIES. You represent and warrant that You have full capacity to enter into this Third-Party Tabletop License agreement, that your Work does not violate nor infringe the rights of any third party, and that it complies with all applicable laws, rules and regulations in every jurisdiction in which it is created, published, sold and distributed.
+
+12. DISCLAIMER, LIMITATION OF LIABILITY AND INDEMNIFICATION. NDG AND
+EG ARE PROVIDING FABULA ULTIMA “AS IS”, MAKE NO REPRESENTATIONS NOR
+WARRANTIES, EXCEPT AS EXPRESSLY STATED IN THIS LICENSE AGREEMENT, AND
+DISCLAIM ALL WARRANTIES – EXPRESS, IMPLIED, STATUTORY OR OTHERWISE.
+NDG and EG have no liability for Your use of Fabula Ultima, as indeed You expressly waive any claim for any direct, indirect, punitive, social, incidental or consequential damages. You agree to indemnify, and keep indemnified, NDG and EG, their officers, directors, agents, licensors, successors and assigns against all liabilities, claims, losses, costs, damage and expenses including legal fees incurred by NDG and EG should You breach any of the terms of this agreement.
+
+13. THIRD-PARTY TABLETOP LICENSE UPDATE AND FINAL NOTES. NDG and EG may update this Third-Party Tabletop License agreement at their sole discretion. In such an event You will continue to have the right to create, publish, sell and distribute your Work under the terms of this agreement or any subsequent version of this agreement at your discretion. You acknowledge and admit that You have not relied on any terms or representations other than those expressly stated in this agreement. You also acknowledge and expressly admit that no business, employment nor agency relationship at all exists between You and NDG and EG as a result of this license agreement. NDG and EG's inertia, inactivity or failure to exercise any right/provision in this Third-Party Tabletop License agreement shall not constitute a waiver unless expressly acknowledged and agreed to by NDG and EG in writing
+
+--------------------------------
