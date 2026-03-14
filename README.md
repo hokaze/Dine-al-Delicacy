@@ -1,7 +1,7 @@
 # Dine-al Delicacy
 Assistant tool for Gourmet class from the Fabula Ultima Natural Fantasy Atlas.
 
-Very early proof-of-concept. Not yet particularly functional, but you can demo it [here](https://hokaze.github.io/https://hokaze.github.io/Dine-al-Delicacy)
+Very early proof-of-concept. Not yet particularly functional, but you can demo it [here](https://hokaze.github.io/Dine-al-Delicacy)
 
 Intent is to function as a "cookbook" for the delicacy mechanics of the Gourmet class, including automating the randomised effects of first combining ingredients, buying/finding random ingredients, and to track ingredient usage.
 
