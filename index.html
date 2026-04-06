@@ -48,7 +48,7 @@
           <td class="name">Mage's Regret</td>
           <td>Bitter (2) + Salty (0) + Sour (1)</td>
           <td>0</td>
-          <td>Each of this <b>delicacy</b>'s targets cannot perform the <b>Spell</b> action during their next turn.</td>
+          <td>Each of this <b>delicacy</b>'s targets suffers the <b>shaken</b> status effect.<br>Each of this <b>delicacy</b>'s targets cannot perform the <b>Guard</b> action during their next turn.<br>Each of this <b>delicacy</b>'s targets cannot perform the <b>Spell</b> action during their next turn.<br></td>
           <td><button>[Cook]</button></td>
           <td><button>[Rename]</button></td>
         </tr>
@@ -79,35 +79,35 @@
         <tr>
           <td class="name">Bitter</td>
           <td id="Bitter_qty">2</td>
-          <td><a><input id="Bitter_check" type="checkbox"/></a></td>
+          <td><a><input id="Bitter_check" type="checkbox"/></a> <a><input id="Bitter_check2" type="checkbox"/></a></td>
           <td><button onclick="addIngredient('Bitter', 1)">[Buy 1 for 20z]</button></td>
           <td><button onclick="addIngredient('Bitter', -1)">[Remove 1]</button></td>
         </tr>
         <tr>
           <td class="name">Salty</td>
           <td id="Salty_qty">0</td>
-          <td><a><input id="Salty_check" type="checkbox"/></a></td>
+          <td><a><input id="Salty_check" type="checkbox"/></a> <a><input id="Salty_check2" type="checkbox"/></a></td>
           <td><button onclick="addIngredient('Salty', 1)">[Buy 1 for 20z]</button></td>
           <td><button onclick="addIngredient('Salty', -1)">[Remove 1]</button></td>
         </tr>
         <tr>
           <td class="name">Sour</td>
           <td id="Sour_qty">1</td>
-          <td><a><input id="Sour_check" type="checkbox"/></a></td>
+          <td><a><input id="Sour_check" type="checkbox"/></a> <a><input id="Sour_check2" type="checkbox"/></a></td>
           <td><button onclick="addIngredient('Sour', 1)">[Buy 1 for 20z]</button></td>
           <td><button onclick="addIngredient('Sour', -1)">[Remove 1]</button></td>
         </tr>
         <tr>
           <td class="name">Sweet</td>
           <td id="Sweet_qty">3</td>
-          <td><a><input id="Sweet_check" type="checkbox"/></a></td>
+          <td><a><input id="Sweet_check" type="checkbox"/></a> <a><input id="Sweet_check2" type="checkbox"/></a></td>
           <td><button onclick="addIngredient('Sweet', 1)">[Buy 1 for 20z]</button></td>
           <td><button onclick="addIngredient('Sweet', -1)">[Remove 1]</button></td>
         </tr>
         <tr>
           <td class="name">Umami</td>
           <td id="Umami_qty">0</td>
-          <td><a><input id="Umami_check" type="checkbox"/></a></td>
+          <td><a><input id="Umami_check" type="checkbox"/></a> <a><input id="Umami_check2" type="checkbox"/></a></td>
           <td><button onclick="addIngredient('Umami', 1)">[Buy 1 for 20z]</button></td>
           <td><button onclick="addIngredient('Umami', -1)">[Remove 1]</button></td>
         </tr>
@@ -116,6 +116,7 @@
           <td id="Choice_qty">1</td>
           <td>N/A</td>
           <td colspan="2">
+              <button onclick="pickIngredient(1)">[Pick 1]</button>
               <select name="Choice_select" id="Choice_select">
                 <option value="Bitter">Bitter</option>
                 <option value="Salty">Salty</option>
@@ -123,7 +124,6 @@
                 <option value="Sweet">Sweet</option>
                 <option value="Umami">Umami</option>
               </select>
-            <button onclick="pickIngredient(1)">[Pick 1]</button>
           </td>
         </tr>
         <tfoot>
@@ -262,7 +262,7 @@
     
     <br/><br/>
     <footer>
-      <p><i>Version 0.02 (2026-03-14)</i></p>
+      <p><i>Version 0.03 (2026-04-06)</i></p>
       <br/>
       <p>
         <strong>Notice</strong>
@@ -277,6 +277,16 @@
       <br/>
       <p>
         <strong>Recent Changes</strong>
+        <br/>
+        <br/>
+        <u>v0.03 - Bugfixes for combining ingredients</u>
+        <br/>
+        - Fixed inability to select multiple of the same ingredient
+        <br/>
+        - Fixed 3 ingredient delicacies not producing multiple effects
+        <br/>
+        - Fixed bug where it was possible to randomly roll an effect already assigned
+        <br/>
         <br/>
         <u>v0.02 - Some demoable functionality</u>
         <br/>
@@ -303,6 +313,8 @@
         - some sort of message box for selecting options for rolls that result in multiple effects (or picking the "Your choice" ingredient)
         <br/>
         - needs some way of manually adding delicacies you've already rolled outside the app, etc
+        <br/>
+        - renaming button to work, better default names, UX/UI improvements (better feedback, indications when you have too few/many ingredients selected)
         <br/>
         - eventual save/load with "save slots" (look into browser webstorage but also option to import/export from JSON)
       </p>

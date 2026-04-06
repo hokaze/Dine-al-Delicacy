@@ -87,33 +87,42 @@ function pickIngredient(qty)
 // combine ingredients and roll for a random effect
 function combineIngredients()
 {
+    var new_delicacy = {};
     console.log("Combining ingredients...");
     
     // get which ingredients were selected for combining
     var combine_list = [];
     var ingr_arr = Object.keys(ingredients);
+    ingr_arr.pop() // remove "Choice" as that's not a real ingredient
     for (let i = 0; i < ingr_arr.length; i++)
     {
         let name = ingr_arr[i];
-        // skip "choice" as that doesn't have a checkbox
-        if (name != "Choice")
+        if (document.getElementById(name + "_check").checked)
         {
-            if (document.getElementById(name + "_check").checked)
+            // sanity check: ticked ingredients must have at least 1 qty
+            // TODO: also disable the checkbox if qty = 0?
+            if (ingredients[name] < 1)
             {
-                // sanity check: ticked ingredients must have at least 1 qty
-                // TODO: also disable the checkbox if qty = 0?
-                if (ingredients[name] < 1)
-                {
-                    // TODO: this should have a warning in the GUI not the console
-                    console.log("Can't combine, need at least 1 of ingredient " + name);
-                    return 1;
-                }
-                combine_list.push(name);
+                // TODO: this should have a warning in the GUI not the console
+                console.log("Can't combine, need at least 1 of ingredient " + name);
+                return 1;
             }
+            combine_list.push(name);
+        }
+        // 2nd checkbox for adding 2 of a single ingredient
+        if (document.getElementById(name + "_check2").checked)
+        {
+            if (ingredients[name] < 1)
+            {
+                // TODO: this should have a warning in the GUI not the console
+                console.log("Can't combine, need at least 1 of ingredient " + name);
+                return 1;
+            }
+            combine_list.push(name);
         }
     }
     
-    var ingredient_combo = combine_list.map( (e) => (e) ).join(', ');
+    var ingredient_combo = combine_list.map( (e) => (e) ).join(" + ");
     console.log("Ingredients are: " + ingredient_combo);
     
     // sanity check: needs 2-3 checkboxes ticked, no more, no less
@@ -129,11 +138,11 @@ function combineIngredients()
     for (let i = 0; i < delicacy_known.length; i++)
     {
         var delicacy = delicacy_known[i];
-        var combo = delicacy.combo1 + ", " + delicacy.combo2;
-        if (delicacy.combo3) { combo += ", " + delicacy.combo3; }
-        if (combo == ingredient_combo)
+        var full_combo = delicacy.items[0] + " + " + delicacy.items[1];
+        if (delicacy.items[2]) { full_combo += " + " + delicacy.items[2]; }
+        if (full_combo == ingredient_combo)
         {
-            console.log("Already used this combination, pick a different combination of ingredients!");
+            console.log("Already made this delicacy before, pick a different combination of ingredients!");
             return 1;
         }
     };
@@ -145,52 +154,82 @@ function combineIngredients()
         return 1;
     }
     
-    // actually get to try rolling for a random effect! roll 1d12
-    var eff_keys = randomEffect();
-    
-    // only subtract ingredient stock if combination was successful
-    if (eff_keys[0])
+    // generate all possible ingredient combinations
+    var two_combos = [];
+    for (let i = 0; i < combine_list.length; i++)
     {
-        // get details for new delicacy, including making sure that name includes the sub effect chosen
-        var effect = delicacy_effects[eff_keys[0]];
-        var name = effect.name;
-        if (effect.options > 1) { name += " " + effect.sub_effects[eff_keys[1]]; }
-        var new_delicacy = {name: name, effect: eff_keys[0], combo1: combine_list[0], combo2: combine_list[1]};
-        
-        // sub effect and 3rd ingredient are optional
-        if (eff_keys[1]) { new_delicacy["sub_effect"] = eff_keys[1]; }
-        if (combine_list.length > 2) { new_delicacy["combo3"] = combine_list[2]; }
-        
-        // add to known effects
-        if (effects_known[eff_keys[1]])
+        for (let j = i+1; j < combine_list.length; j++)
         {
-            effects_known[eff_keys[0]][eff_keys[1]] = true;
+            two_combos.push(combine_list[i] + " + " + combine_list[j]);
+        }
+    }
+    // remove any duplicates so only unique combinations remain
+    two_combos = [...new Set(two_combos)]; 
+    
+    // loop over 2-combinations as effects are assigned per combination not per delicacy!
+    for (let i = 0; i < two_combos.length; i++)
+    {
+        // has this 2 combination already been asigned an effect?
+        if (combination_effects[two_combos[i]])
+        {
+            console.log("Combination " + two_combos[i] + " already has effect assigned, skipping");
         }
         else
         {
-            effects_known[eff_keys[0]] = true;
+            // actually get to try rolling for a random effect! roll 1d12
+            var eff_keys = randomEffect();
+            
+            // only subtract ingredient stock if combination was successful
+            if (eff_keys[0])
+            {
+                // get details for effect + sub_effect for that 2 combo
+                var effect = delicacy_effects[eff_keys[0]];
+                var name = effect.name;
+                if (effect.options > 1) { name += " " + effect.sub_effects[eff_keys[1]]; }
+                var combination_effect = {name: name, effect: eff_keys[0]};
+                if (eff_keys[1]) { combination_effect["sub_effect"] = eff_keys[1]; }
+                
+                // add to combination_effects
+                combination_effects[two_combos[i]] = combination_effect;
+                
+                // add to known effects
+                if (effects_known[eff_keys[1]])
+                {
+                    effects_known[eff_keys[0]][eff_keys[1]] = true;
+                }
+                else
+                {
+                    effects_known[eff_keys[0]] = true;
+                }
+            }
+            // should always generate an effect even if we need to reroll, should never hit this
+            else
+            {
+                console.log("Failed to generate random effect from combined ingredients")
+                return -1;
+            }
         }
-        
-        // add to list of known delicacies
-        delicacy_known.push(new_delicacy);
-        
-        // if this was the 15th delicacy, we can add no more to the cookbook!
-        if (delicacy_known.length == max_delicacies_known)
-        {
-            console.log("Last delicacy added to cookbook, no more to discover!");
-        }
-        
-        // subtract ingredients on success
-        combine_list.forEach( name => {
-            addIngredient(name, -1);
-        });
     }
-    // should always generate an effect even if we need to reroll, should never hit this
-    else
+    
+    // finally populate the actual delicacy
+    
+    // TODO: better default names for delicacies (will also add ability for user to rename them, but Delicacy #4, etc will do for now)
+    default_name = "Delicacy #" + (delicacy_known.length+1);
+    new_delicacy = {name: default_name, items: combine_list, two_combos: two_combos};
+    
+    // add to list of known delicacies
+    delicacy_known.push(new_delicacy);
+    
+    // if this was the 15th delicacy, we can add no more to the cookbook!
+    if (delicacy_known.length == max_delicacies_known)
     {
-        console.log("Failed to generate random effect from combined ingredients")
-        return -1;
+        console.log("Last delicacy added to cookbook, no more to discover!");
     }
+    
+    // subtract ingredients on success
+    combine_list.forEach( name => {
+        addIngredient(name, -1);
+    });
     
     console.log("Combined ingredients successfully: " + new_delicacy.name);
     
@@ -244,7 +283,7 @@ function randomEffect(count = 0)
         console.log("Rolled this effect before, checking to see if any choices remain...");
         
         // check to see if effect + sub-effects have already been taken or not
-        known = Object.keys(effects_known[d12]).length;
+        known = Object.keys(effects_known[d12]).length || 1;
         
         if (known >= options)
         {
@@ -293,9 +332,9 @@ function cook(delicacy_index)
     if (can_make > 0)
     {
         console.log("Enough ingredients to make " + can_make + ", making one batch!");
-        addIngredient(delicacy.combo1, -1);
-        addIngredient(delicacy.combo2, -1);
-        if (delicacy.combo3) { addIngredient(delicacy.combo3, -1); }
+        addIngredient(delicacy.items[0], -1);
+        addIngredient(delicacy.items[1], -1);
+        if (delicacy.items[2]) { addIngredient(delicacy.items[2], -1); }
         return 1;
     }
     
@@ -334,39 +373,48 @@ function updateDelicacyTable()
         
         // Column: "Combination"
         // combination of ingredients should also include how many of each ingredient is currently available
-        var combination = '<td>' + delicacy.combo1 + ' (' + ingredients[delicacy.combo1] + ')';
-        combination += ' + ' + delicacy.combo2 + ' (' + ingredients[delicacy.combo2] + ')';
+        var combination = '<td>' + delicacy.items[0] + ' (' + ingredients[delicacy.items[0]] + ')';
+        combination += ' + ' + delicacy.items[1] + ' (' + ingredients[delicacy.items[1]] + ')';
         
         // only some delicacies have a third ingredient
-        if (delicacy.combo3)
+        if (delicacy.items[2])
         {
-            combination += ' + ' + delicacy.combo3 + ' (' + ingredients[delicacy.combo3] + ')';
+            combination += ' + ' + delicacy.items[2] + ' (' + ingredients[delicacy.items[2]] + ')';
         }
         tr.innerHTML += combination + '</td>';
         
         // Column: "Can Make?"
         // check if we have enough ingredients and how many times the delicacy can be made by just checking what the lowest quantity of a required ingredient is
         var can_make = 0;
-        if (delicacy.combo3)
+        if (delicacy.items[2])
         {
-            can_make = Math.min(ingredients[delicacy.combo1], ingredients[delicacy.combo2], ingredients[delicacy.combo3]);
+            can_make = Math.min(ingredients[delicacy.items[0]], ingredients[delicacy.items[1]], ingredients[delicacy.items[2]]);
         }
         else
         {
-            can_make = Math.min(ingredients[delicacy.combo1], ingredients[delicacy.combo2]);
+            can_make = Math.min(ingredients[delicacy.items[0]], ingredients[delicacy.items[1]]);
         }
         tr.innerHTML += '<td>' + can_make + '</td>';
         
         // Column: Effect
+        // for delicacies with 3+ ingredients, can have multiple effects
         // needs to also handle "choose one" sub effects substituing the damage type / status condition
-        var effect = delicacy_effects[delicacy.effect]
-        var effect_text = effect.effect;
-        if (delicacy.sub_effect)
+        var effects_text = '';
+        var two_combos = delicacy.two_combos;
+        for (let i = 0; i < two_combos.length; i++)
         {
-            var sub_effect = effect.sub_effects[delicacy.sub_effect];
-            effect_text = effect_text.replace(/\(choose one: .*\)/, sub_effect);
+            var combination_effect = combination_effects[two_combos[i]];
+            var effect = delicacy_effects[combination_effect.effect]
+            var effect_text = effect.effect;
+            
+            if (combination_effect.sub_effect)
+            {
+                var sub_effect = effect.sub_effects[combination_effect.sub_effect];
+                effect_text = effect_text.replace(/\(choose one: .*\)/, sub_effect);
+            }
+            effects_text += effect_text + "<br/>";
         }
-        tr.innerHTML += '<td>' + effect_text + '</td>';
+        tr.innerHTML += '<td>' + effects_text + '</td>';
         
         // Column: Actions
         // cook button deducts ingredients but has no feedback
@@ -500,24 +548,47 @@ var delicacy_effects =
     },
 };
 
+// effects are assigned to ingredient combinations rather than delicacies
+// directly, as 3+ ingredient deliacies can have multiple combinations and
+// thus multiple effects, and we need e.g. Salt + Sweet to grant the same
+// effect both for the 2 ingredient version and any delicacies with a 3rd
+var combination_effects =
+{
+    "Bitter + Bitter": '',
+    "Bitter + Salty": {effect: 2, sub_effect: 2},
+    "Bitter + Sour": {effect: 7},
+    "Bitter + Sweet": '',
+    "Bitter + Umami": '',
+    "Salty + Salty": '',
+    "Salty + Sour": {effect: 8},
+    "Salty + Sweet": '',
+    "Salty + Umami": '',
+    "Sour + Sour": '',
+    "Sour + Sweet": {effect: 3},
+    "Sour + Umami": '',
+    "Sweet + Sweet": '',
+    "Sweet + Umami": {effect: 2, sub_effect: 4},
+    "Umami + Umami": '',
+}
+
 // stores delicacies known by character - currently populated with the placeholders from the HTML
 var delicacy_known = 
 [
-    {name: "Sou-Swee Treat", effect: 3, combo1: "Sour", combo2: "Sweet"},
-    {name: "Mage's Regret", effect: 8, combo1: "Bitter", combo2: "Salty", combo3: "Sour"},
-    {name: "Dubious Food", effect: 2, sub_effect: 4, combo1: "Sweet", combo2: "Umami"},
+    {name: "Sou-Swee Treat", items: ["Sour", "Sweet"], two_combos: ["Sour + Sweet"]},
+    {name: "Mage's Regret", items: ["Bitter", "Salty", "Sour"], two_combos: ["Bitter + Salty", "Bitter + Sour", "Salty + Sour"]},
+    {name: "Dubious Food", items: ["Sweet", "Umami"], two_combos: ["Sweet + Umami"]},
 ];
 
 // when generating effects, check against this to know when to reroll an effect or sub effect, faster checking it here than in delicacy_known as it's keyed by the same key as delicacy_effects
 var effects_known =
 {
     1: {},
-    2: {4: true},
+    2: {2: true, 4: true},
     3: true,
     4: '',
     5: {},
     6: {},
-    7: '',
+    7: true,
     8: true,
     9: '',
     10: {},
